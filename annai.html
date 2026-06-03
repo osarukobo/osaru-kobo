@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ベランダ家庭菜園入門セミナー｜参加者向け案内</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: "Hiragino Kaku Gothic ProN", "Meiryo", "Yu Gothic", sans-serif;
+    background: #FBF8F1;
+    color: #1a1a1a;
+    line-height: 1.7;
+  }
+
+  /* ヒーロー */
+  .hero {
+    background: linear-gradient(135deg, #16365C 0%, #F4A300 100%);
+    color: #fff;
+    text-align: center;
+    padding: 72px 24px 64px;
+  }
+  .hero .tag {
+    display: inline-block;
+    border: 2px solid rgba(255,255,255,0.7);
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    padding: 4px 18px;
+    margin-bottom: 20px;
+    color: rgba(255,255,255,0.9);
+  }
+  .hero h1 {
+    font-size: 32px;
+    font-weight: 900;
+    line-height: 1.4;
+    margin-bottom: 16px;
+    text-shadow: 0 2px 8px rgba(0,0,0,0.18);
+  }
+  .hero .date {
+    font-size: 17px;
+    font-weight: 700;
+    margin-bottom: 32px;
+    opacity: 0.95;
+  }
+  .btn {
+    display: inline-block;
+    background: #fff;
+    color: #16365C;
+    font-weight: 900;
+    font-size: 16px;
+    padding: 16px 48px;
+    border-radius: 50px;
+    text-decoration: none;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.18);
+    transition: transform 0.15s, box-shadow 0.15s;
+    letter-spacing: 0.04em;
+    cursor: pointer;
+    border: none;
+  }
+  .btn:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,0,0,0.22); }
+  .btn.accent {
+    background: #F4A300;
+    color: #fff;
+  }
+
+  /* コンテナ */
+  .container {
+    max-width: 880px;
+    margin: 0 auto;
+    padding: 48px 24px 64px;
+  }
+
+  /* セクション見出し共通 */
+  .section-heading {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 28px;
+    justify-content: center;
+  }
+  .badge {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    min-width: 36px;
+    background: #F4A300;
+    color: #fff;
+    font-size: 16px;
+    font-weight: 900;
+    border-radius: 50%;
+  }
+  .section-heading h2 {
+    font-size: 22px;
+    font-weight: 900;
+    color: #16365C;
+  }
+
+  /* 3つのポイント */
+  .points-section { margin-bottom: 56px; }
+  .points-grid {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+  }
+  .point-card {
+    flex: 1;
+    min-width: 220px;
+    background: #fff;
+    border-radius: 16px;
+    box-shadow: 0 2px 12px rgba(22,54,92,0.08);
+    padding: 32px 24px;
+    text-align: center;
+  }
+  .point-card .emoji {
+    font-size: 44px;
+    margin-bottom: 14px;
+    display: block;
+  }
+  .point-card h3 {
+    font-size: 16px;
+    font-weight: 800;
+    color: #16365C;
+    margin-bottom: 10px;
+  }
+  .point-card p {
+    font-size: 14px;
+    color: #555;
+  }
+
+  /* FAQ */
+  .faq-section { margin-bottom: 56px; }
+  .faq-list { display: flex; flex-direction: column; gap: 16px; }
+  .faq-item {
+    background: #fff;
+    border-radius: 16px;
+    box-shadow: 0 2px 12px rgba(22,54,92,0.08);
+    overflow: hidden;
+  }
+  .faq-q {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    padding: 20px 24px;
+    background: #fff;
+  }
+  .faq-q .q-badge {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 30px;
+    height: 30px;
+    min-width: 30px;
+    background: #F4A300;
+    color: #fff;
+    font-size: 14px;
+    font-weight: 900;
+    border-radius: 50%;
+    margin-top: 2px;
+  }
+  .faq-q p {
+    font-weight: 800;
+    font-size: 15px;
+    color: #16365C;
+  }
+  .faq-a {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    padding: 16px 24px 20px;
+    background: #f7f4ee;
+    border-top: 1px solid #ede8dc;
+  }
+  .faq-a .a-badge {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 30px;
+    height: 30px;
+    min-width: 30px;
+    background: #16365C;
+    color: #fff;
+    font-size: 14px;
+    font-weight: 900;
+    border-radius: 50%;
+    margin-top: 2px;
+  }
+  .faq-a p { font-size: 14px; color: #444; }
+
+  /* クロージング */
+  .closing-section {
+    background: #16365C;
+    border-radius: 16px;
+    padding: 48px 32px;
+    text-align: center;
+    color: #fff;
+  }
+  .closing-section h2 {
+    font-size: 22px;
+    font-weight: 900;
+    margin-bottom: 12px;
+    line-height: 1.5;
+  }
+  .closing-section p {
+    font-size: 15px;
+    opacity: 0.85;
+    margin-bottom: 28px;
+  }
+  .closing-section .price {
+    font-size: 28px;
+    font-weight: 900;
+    color: #F4A300;
+    margin-bottom: 24px;
+  }
+  .closing-section .price span {
+    font-size: 14px;
+    color: rgba(255,255,255,0.7);
+    font-weight: 400;
+    margin-left: 6px;
+  }
+
+  footer {
+    background: #16365C;
+    color: #afc5de;
+    text-align: center;
+    font-size: 13px;
+    padding: 20px;
+    margin-top: 0;
+  }
+  footer strong { color: #F4A300; }
+</style>
+</head>
+<body>
+
+<!-- ヒーロー -->
+<section class="hero">
+  <div class="tag">🌿 ONLINE SEMINAR ／ 初心者歓迎</div>
+  <h1>週末ではじめる<br>「ベランダ家庭菜園」入門セミナー</h1>
+  <p class="date">📅 2025年7月12日（土）10:00〜12:00　オンライン開催</p>
+  <a class="btn" href="#">今すぐ申し込む（残席わずか）</a>
+</section>
+
+<div class="container">
+
+  <!-- 3つのポイント -->
+  <section class="points-section">
+    <div class="section-heading">
+      <div class="badge">1</div>
+      <h2>このセミナー、3つのポイント</h2>
+    </div>
+    <div class="points-grid">
+      <div class="point-card">
+        <span class="emoji">🌱</span>
+        <h3>ゼロ知識でもOK</h3>
+        <p>土・道具・品種の基礎からていねいに解説。「何もわからない」という方こそ歓迎です。</p>
+      </div>
+      <div class="point-card">
+        <span class="emoji">📋</span>
+        <h3>今週末に動ける</h3>
+        <p>受講後すぐ使える「買い物リスト」と「管理カレンダー」をその場で作成します。</p>
+      </div>
+      <div class="point-card">
+        <span class="emoji">💬</span>
+        <h3>質問し放題</h3>
+        <p>最後の20分はQ&Aタイム。「うちのベランダでも大丈夫？」など何でも聞けます。</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="faq-section">
+    <div class="section-heading">
+      <div class="badge">2</div>
+      <h2>よくあるご質問</h2>
+    </div>
+    <div class="faq-list">
+      <div class="faq-item">
+        <div class="faq-q">
+          <div class="q-badge">Q</div>
+          <p>全くの初心者でも参加できますか？植物を育てたことがほとんどありません。</p>
+        </div>
+        <div class="faq-a">
+          <div class="a-badge">A</div>
+          <p>もちろんです！このセミナーはむしろ「今まで一度も育てたことがない」方のために設計されています。専門用語はできる限り使わず、わかりやすい言葉で解説します。</p>
+        </div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">
+          <div class="q-badge">Q</div>
+          <p>ベランダが狭くても参加できますか？マンションの小さなバルコニーしかありません。</p>
+        </div>
+        <div class="faq-a">
+          <div class="a-badge">A</div>
+          <p>大丈夫です！プランター1個分（60cm幅）のスペースがあれば十分です。限られたスペースを活かす配置アイデアもセミナー内でご紹介します。</p>
+        </div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">
+          <div class="q-badge">Q</div>
+          <p>当日参加できなかった場合、後から動画を見ることはできますか？</p>
+        </div>
+        <div class="faq-a">
+          <div class="a-badge">A</div>
+          <p>お申し込みいただいた方には、開催後1週間以内にアーカイブ動画URLをお送りします。お仕事などで当日ご参加が難しい方もぜひお申し込みください。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- クロージング -->
+  <section class="closing-section">
+    <h2>今週末、ベランダに<br>はじめての緑を育ててみませんか？</h2>
+    <p>定員50名・先着順。残席が少なくなっています。<br>お早めにお申し込みください。</p>
+    <p class="price">参加費 1,500円<span>（税込）</span></p>
+    <a class="btn accent" href="#">申し込みフォームへ進む</a>
+  </section>
+
+</div>
+
+<footer>
+  <strong>Produced with Claude Code ✦ 主催：グリーンスタート協会（架空）</strong>
+</footer>
+
+</body>
+</html>

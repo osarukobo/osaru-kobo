@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>企画書｜ベランダ家庭菜園入門セミナー</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: "Hiragino Kaku Gothic ProN", "Meiryo", "Yu Gothic", sans-serif;
+    background: #FBF8F1;
+    color: #1a1a1a;
+    line-height: 1.7;
+  }
+  header {
+    background: #16365C;
+    color: #fff;
+    padding: 48px 32px 40px;
+    text-align: center;
+  }
+  header .label {
+    display: inline-block;
+    background: #F4A300;
+    color: #fff;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    padding: 4px 16px;
+    border-radius: 20px;
+    margin-bottom: 16px;
+  }
+  header h1 {
+    font-size: 28px;
+    font-weight: 900;
+    letter-spacing: 0.04em;
+    line-height: 1.4;
+    margin-bottom: 12px;
+  }
+  header .catch {
+    font-size: 15px;
+    color: #F4A300;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+  }
+  .container {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 40px 24px 60px;
+  }
+  .section {
+    background: #fff;
+    border-radius: 16px;
+    box-shadow: 0 2px 12px rgba(22,54,92,0.08);
+    padding: 32px 36px;
+    margin-bottom: 28px;
+  }
+  .section-heading {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 22px;
+  }
+  .badge {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    min-width: 36px;
+    background: #F4A300;
+    color: #fff;
+    font-size: 16px;
+    font-weight: 900;
+    border-radius: 50%;
+  }
+  .section-heading h2 {
+    font-size: 19px;
+    font-weight: 800;
+    color: #16365C;
+  }
+
+  /* テーブル共通 */
+  table { width: 100%; border-collapse: collapse; font-size: 14px; }
+  th {
+    background: #16365C;
+    color: #fff;
+    padding: 10px 16px;
+    text-align: left;
+    font-weight: 700;
+  }
+  td { padding: 10px 16px; border-bottom: 1px solid #e8e3d8; }
+  tr:last-child td { border-bottom: none; }
+  tr:nth-child(even) td { background: #f7f4ee; }
+
+  /* 開催概要 2列 */
+  .overview-table th { width: 30%; }
+
+  /* BEFORE AFTER */
+  .ba-wrapper {
+    display: flex;
+    align-items: stretch;
+    gap: 0;
+  }
+  .ba-box {
+    flex: 1;
+    border-radius: 12px;
+    padding: 24px 20px;
+    font-size: 14px;
+  }
+  .ba-box.before {
+    background: #f0eee8;
+    border: 2px solid #ccc8be;
+  }
+  .ba-box.after {
+    background: #eaf3fb;
+    border: 2px solid #a0c4e8;
+  }
+  .ba-box .ba-label {
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 0.12em;
+    margin-bottom: 10px;
+    display: block;
+  }
+  .ba-box.before .ba-label { color: #888; }
+  .ba-box.after .ba-label { color: #16365C; }
+  .ba-box ul { padding-left: 18px; }
+  .ba-box ul li { margin-bottom: 6px; }
+  .ba-arrow {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 16px;
+    font-size: 32px;
+    color: #F4A300;
+    font-weight: 900;
+  }
+
+  /* チェックリスト */
+  .checklist { list-style: none; padding: 0; }
+  .checklist li {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 8px 0;
+    border-bottom: 1px solid #eee9de;
+    font-size: 15px;
+  }
+  .checklist li:last-child { border-bottom: none; }
+  .checklist li::before {
+    content: "✔";
+    color: #F4A300;
+    font-weight: 900;
+    font-size: 16px;
+    margin-top: 2px;
+    flex-shrink: 0;
+  }
+
+  /* 注意事項 */
+  .notes { font-size: 14px; color: #444; }
+  .notes li { margin-bottom: 8px; padding-left: 4px; list-style: disc; margin-left: 18px; }
+
+  footer {
+    background: #16365C;
+    color: #afc5de;
+    text-align: center;
+    font-size: 13px;
+    padding: 20px;
+    margin-top: 20px;
+  }
+  footer span { color: #F4A300; font-weight: 700; }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="label">社内用 企画書</div>
+  <h1>週末ではじめる「ベランダ家庭菜園」<br>入門セミナー</h1>
+  <p class="catch">── 土いじりゼロ経験でも、今週末から育てられる ──</p>
+</header>
+
+<div class="container">
+
+  <!-- 1. 開催概要 -->
+  <div class="section">
+    <div class="section-heading">
+      <div class="badge">1</div>
+      <h2>開催概要</h2>
+    </div>
+    <table class="overview-table">
+      <tr><th>日時</th><td>2025年7月12日（土）10:00 〜 12:00</td></tr>
+      <tr><th>形式</th><td>オンライン（Zoom ウェビナー）</td></tr>
+      <tr><th>定員</th><td>50名（先着順）</td></tr>
+      <tr><th>参加費</th><td>1,500円（税込）</td></tr>
+      <tr><th>対象</th><td>家庭菜園が未経験・初心者の方／ベランダ・バルコニーをお持ちの方</td></tr>
+      <tr><th>主催</th><td>グリーンスタート協会（架空）</td></tr>
+    </table>
+  </div>
+
+  <!-- 2. 背景 -->
+  <div class="section">
+    <div class="section-heading">
+      <div class="badge">2</div>
+      <h2>背景・なぜ今やるのか</h2>
+    </div>
+    <p style="font-size:15px;">在宅勤務の定着により「自宅をより豊かにしたい」というニーズが急増しており、検索トレンドでも「ベランダ菜園 初心者」は前年比180%超で伸長しています。一方、土・道具・品種の選び方がわからず一歩踏み出せない層が多く、入門コンテンツへの需要は明らかです。本セミナーは「週末の2時間でスタートラインに立てる」をコンセプトに、初心者が抱える不安をまるごと解消する場として企画しました。</p>
+  </div>
+
+  <!-- 3. BEFORE → AFTER -->
+  <div class="section">
+    <div class="section-heading">
+      <div class="badge">3</div>
+      <h2>受講後のゴール</h2>
+    </div>
+    <div class="ba-wrapper">
+      <div class="ba-box before">
+        <span class="ba-label">BEFORE（受講前）</span>
+        <ul>
+          <li>何から始めればいいかわからない</li>
+          <li>土や肥料の種類が多くて混乱する</li>
+          <li>育てても枯らしてしまいそうで不安</li>
+          <li>ベランダのスペースが足りないと思っている</li>
+        </ul>
+      </div>
+      <div class="ba-arrow">→</div>
+      <div class="ba-box after">
+        <span class="ba-label">AFTER（受講後）</span>
+        <ul>
+          <li>今週末に買うものリストが揃っている</li>
+          <li>初心者向け品種3選を即答できる</li>
+          <li>水やり・肥料のタイミングが判断できる</li>
+          <li>プランター1つから始める自信がついている</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- 4. プログラム -->
+  <div class="section">
+    <div class="section-heading">
+      <div class="badge">4</div>
+      <h2>プログラム</h2>
+    </div>
+    <table>
+      <thead>
+        <tr><th>時刻</th><th>内容</th><th>所要時間</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>10:00</td><td>オープニング・自己紹介・本日の流れ説明</td><td>10分</td></tr>
+        <tr><td>10:10</td><td>【基礎】ベランダ菜園に必要な道具・土・プランターの選び方</td><td>25分</td></tr>
+        <tr><td>10:35</td><td>【品種】初心者が絶対に失敗しない野菜・ハーブ3選</td><td>20分</td></tr>
+        <tr><td>10:55</td><td>【実践】種まき〜収穫までの管理カレンダーを作ろう</td><td>25分</td></tr>
+        <tr><td>11:20</td><td>【よくある失敗】枯れる・病気になる原因と対処法</td><td>20分</td></tr>
+        <tr><td>11:40</td><td>Q&Aセッション・クロージング</td><td>20分</td></tr>
+        <tr><td>12:00</td><td>終了</td><td>—</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- 5. こんな方におすすめ -->
+  <div class="section">
+    <div class="section-heading">
+      <div class="badge">5</div>
+      <h2>こんな方におすすめ</h2>
+    </div>
+    <ul class="checklist">
+      <li>家庭菜園に興味はあるが、何から始めればいいか全くわからない方</li>
+      <li>以前チャレンジして失敗した経験があり、もう一度リベンジしたい方</li>
+      <li>忙しくても週末だけで無理なく続けられる趣味を探している方</li>
+    </ul>
+  </div>
+
+  <!-- 6. 持ち物・注意事項 -->
+  <div class="section">
+    <div class="section-heading">
+      <div class="badge">6</div>
+      <h2>持ち物・注意事項</h2>
+    </div>
+    <ul class="notes">
+      <li>Zoom が利用できるPC・スマートフォン・タブレット（事前にアプリのインストール推奨）</li>
+      <li>メモ帳・筆記用具（当日配布のPDFテキストを印刷しておくと便利です）</li>
+      <li>講義中の録画・スクリーンショットの無断転載はご遠慮ください</li>
+      <li>参加URLは開催3日前までにご登録メールアドレスへ送付します</li>
+      <li>定員に達し次第、受付を締め切ります。お早めにお申し込みください</li>
+    </ul>
+  </div>
+
+</div>
+
+<footer>
+  <span>Produced with Claude Code ✦ 主催：グリーンスタート協会（架空）</span>
+</footer>
+
+</body>
+</html>
