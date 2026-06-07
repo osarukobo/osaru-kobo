@@ -26,104 +26,22 @@ jobs:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
         run: |
           python3 << 'EOF'
-          import anthropic
-          import datetime
-          import os
-
+          import anthropic, datetime, os
           try:
               with open("advocate.md", "r", encoding="utf-8") as f:
-                  current_content = f.read()
+                  current = f.read()
           except FileNotFoundError:
-              current_content = ""
-
+              current = ""
           today = datetime.date.today().strftime("%Y年%m月%d日")
           client = anthropic.Anthropic(api_key=os.environ["ANTHROPIC_API_KEY"])
-
-          message = client.messages.create(
+          msg = client.messages.create(
               model="claude-sonnet-4-6",
               max_tokens=2048,
-              messages=[{
-                  "role": "user",
-                  "content": f"""あなたはサイバーセキュリティの専門家です。
-          今日は {today} です。
-
-          以下は現在の advocate.md の内容です：
-          ---
-          {current_content}
-          ---
-
-          最新のセキュリティトレンド・脅威情報・ベストプラクティスをもとに、
-          advocate.md を更新してください。
-
-          要件：
-          - 今週の主要なセキュリティトレンドを3〜5項目追加
-          - 日付を更新
-          - 既存の重要な情報は保持しつつ、古い情報は整理
-          - Markdown形式で出力
-          - ファイルの内容のみを出力し、説明文は不要
-
-          更新後の advocate.md の全内容を出力してください。"""
-              }]
+              messages=[{"role":"user","content":f"あなたはサイバーセキュリティの専門家です。今日は{today}です。以下は現在のadvocate.mdです:\n---\n{current}\n---\n最新のセキュリティトレンドをもとに更新してください。Markdown形式で内容のみ出力してください。"}]
           )
-
           with open("advocate.md", "w", encoding="utf-8") as f:
-              f.write(message.content[0].text)
-          print("advocate.md を更新しました")
+              f.write(msg.content[0].text)
+          print("advocate.md 更新完了")
           EOF
 
       - name: Update guardrail.md via Claude API
-        env:
-          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
-        run: |
-          python3 << 'EOF'
-          import anthropic
-          import datetime
-          import os
-
-          try:
-              with open("guardrail.md", "r", encoding="utf-8") as f:
-                  current_content = f.read()
-          except FileNotFoundError:
-              current_content = ""
-
-          today = datetime.date.today().strftime("%Y年%m月%d日")
-          client = anthropic.Anthropic(api_key=os.environ["ANTHROPIC_API_KEY"])
-
-          message = client.messages.create(
-              model="claude-sonnet-4-6",
-              max_tokens=2048,
-              messages=[{
-                  "role": "user",
-                  "content": f"""あなたはAIセキュリティの専門家です。
-          今日は {today} です。
-
-          以下は現在のAIエージェント用ガードレール文書です：
-          ---
-          {current_content}
-          ---
-
-          最新のAIセキュリティ脅威情報をもとに、ガードレール文書を更新してください。
-
-          要件：
-          - 【今週の重要セキュリティ情報】の欄を最新情報に更新する
-          - 新たに注意が必要なAI特有の攻撃手法があればルールに追加する
-          - 既存のルールは維持しつつ、古い情報だけ整理する
-          - Markdown形式で出力
-          - ファイルの内容のみを出力し、説明文は不要
-
-          更新後の guardrail.md の全内容を出力してください。"""
-              }]
-          )
-
-          with open("guardrail.md", "w", encoding="utf-8") as f:
-              f.write(message.content[0].text)
-          print("guardrail.md を更新しました")
-          EOF
-
-      - name: Commit and push changes
-        run: |
-          git config --local user.email "github-actions[bot]@users.noreply.github.com"
-          git config --local user.name "github-actions[bot]"
-          git add advocate.md guardrail.md
-          git diff --staged --quiet || git commit -m "Weekly security trends update - $(date +'%Y-%m-%d')"
-          git push
