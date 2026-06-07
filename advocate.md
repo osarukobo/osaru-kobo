@@ -1,44 +1,86 @@
-```markdown
-# セキュリティ情報
+name: Weekly Security Trends Update
 
-最終更新日: 2026年06月04日
+on:
+  schedule:
+    - cron: '0 0 * * 1'
+  workflow_dispatch:
 
----
+jobs:
+  update-advocate:
+    runs-on: ubuntu-latest
 
-## 今週の主要なセキュリティトレンド（2026年6月第1週）
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
 
-### 1. AIエージェントを標的にしたプロンプトインジェクション攻撃の増加
-自律型AIエージェントの企業導入が加速する中、外部データソースや Tool Call を悪用したプロンプトインジェクション攻撃が急増している。攻撃者はWebページや文書内に悪意ある指示を埋め込み、AIエージェントに意図しない操作（データ漏洩・コマンド実行）を行わせる手法を多用している。入力サニタイズ、エージェントの権限最小化、出力検証の実装が急務となっている。
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
 
-### 2. ポスト量子暗号（PQC）移行への対応加速
-NIST が2024年に標準化した ML-KEM（Kyber）・ML-DSA（Dilithium）・SLH-DSA（SPHINCS+）への移行期限を見据え、各国政府機関および金融機関が既存システムの暗号アルゴリズム棚卸しを本格化させている。「Harvest Now, Decrypt Later」攻撃への対策として、TLS 1.3 + PQC ハイブリッド鍵交換の早期導入が推奨されている。
+      - name: Install dependencies
+        run: pip install anthropic
 
-### 3. サプライチェーン攻撃：悪意あるOSSパッケージの多段階化
-npm・PyPI・Maven 等のパッケージリポジトリを通じたサプライチェーン攻撃が高度化しており、正規パッケージへの依存関係ハイジャックと組み合わせた多段階の侵害が確認されている。SBOM（Software Bill of Materials）の整備と CI/CD パイプラインへの署名検証（Sigstore / cosign）の組み込みが標準対策として定着しつつある。
+      - name: Update advocate.md via Claude API
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+        run: |
+          python3 << 'EOF'
+          import anthropic
+          import datetime
+          import os
 
-### 4. ゼロトラストアーキテクチャにおけるIDプロバイダー（IdP）への攻撃
-ゼロトラスト移行が進む一方で、Okta・Microsoft Entra ID・Ping Identity 等の IdP そのものを標的にした攻撃が増加している。管理コンソールへのフィッシング、セッショントークン窃取、MFA バイパス（AiTM フィッシング）が主な手口となっており、特権アカウントへのフィッシング耐性 MFA（FIDO2/パスキー）の適用が強く推奨されている。
+          try:
+              with open("advocate.md", "r", encoding="utf-8") as f:
+                  current_content = f.read()
+          except FileNotFoundError:
+              current_content = ""
 
-### 5. OT/ICS 環境を狙うランサムウェアグループの活動激化
-製造業・エネルギー・水処理などの重要インフラに対するランサムウェア攻撃が継続的に増加している。IT-OT ネットワーク境界を越える横断的侵害が主な手口であり、資産の可視化（OT資産管理）、ネットワークセグメンテーションの強化、OT向け EDR の導入が対策として注目されている。ICS-CERT および CISA からの最新勧告の継続的な確認が求められる。
+          today = datetime.date.today().strftime("%Y年%m月%d日")
 
----
+          client = anthropic.Anthropic(api_key=os.environ["ANTHROPIC_API_KEY"])
 
-## ベストプラクティス（継続推奨事項）
+          message = client.messages.create(
+              model="claude-sonnet-4-6",
+              max_tokens=2048,
+              messages=[
+                  {
+                      "role": "user",
+                      "content": f"""あなたはサイバーセキュリティの専門家です。
+          今日は {today} です。
 
-- **パッチ管理**: CVSS 9.0以上の脆弱性は公開後 24時間以内、CVSS 7.0以上は 7日以内の適用を目標とする
-- **MFA強化**: SMS/TOTP から FIDO2/パスキーへの移行を優先的に推進する
-- **ログ・監視**: SIEM へのクラウドサービスログ（CloudTrail, Audit Log）の統合と UEBA の活用
-- **インシデントレスポンス**: 年2回以上のテーブルトップ演習および BCP との連携確認
-- **セキュリティ教育**: フィッシングシミュレーションを含む全従業員向けセキュリティ意識向上トレーニングの定期実施
+          以下は現在の advocate.md の内容です：
+          ---
+          {current_content}
+          ---
 
----
+          最新のセキュリティトレンド・脅威情報・ベストプラクティスをもとに、
+          advocate.md を更新してください。
 
-## 参照リソース
+          要件：
+          - 今週の主要なセキュリティトレンドを3〜5項目追加
+          - 日付を更新
+          - 既存の重要な情報は保持しつつ、古い情報は整理
+          - Markdown形式で出力
+          - ファイルの内容のみを出力し、説明文は不要
 
-- [CISA Known Exploited Vulnerabilities Catalog](https://www.cisa.gov/known-exploited-vulnerabilities-catalog)
-- [NIST NVD](https://nvd.nist.gov/)
-- [NIST PQC Standards](https://csrc.nist.gov/projects/post-quantum-cryptography)
-- [MITRE ATT&CK](https://attack.mitre.org/)
-- [ICS-CERT Advisories](https://www.cisa.gov/ics-advisories)
-```
+          更新後の advocate.md の全内容を出力してください。"""
+                  }
+              ]
+          )
+
+          updated_content = message.content[0].text
+
+          with open("advocate.md", "w", encoding="utf-8") as f:
+              f.write(updated_content)
+
+          print("advocate.md を更新しました")
+          EOF
+
+      - name: Commit and push changes
+        run: |
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+          git add advocate.md
+          git diff --staged --quiet || git commit -m "Weekly security trends update - $(date +'%Y-%m-%d')"
+          git push
